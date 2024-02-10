@@ -64,7 +64,21 @@ def load_and_log():
                 np.save(file, data['y'])        
 
         # Save the artifact to W&B
-        run.log_artifact(raw_data)                
+        run.log_artifact(raw_data)
+
+        # Train model, get predictions
+        model = RandomForestClassifier()
+        model.fit(datasets['Data']['Train']['X'], datasets['Data']['Train']['y'])
+        y_pred = model.predict(datasets['Data']['Test']['X'])
+        y_probas = model.predict_proba(datasets['Data']['Test']['X'])
+        importances = model.feature_importances_
+        indices = np.argsort(importances)[::-1]   
+
+        # Initialize W&B run
+        run = wandb.init(project='my-scikit-integration', name="classification")
+        
+        # Visualize model performance
+        wandb.sklearn.plot_class_proportions(datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], datasets['Metadata']['Labels'])
 
 # testing
 load_and_log()
