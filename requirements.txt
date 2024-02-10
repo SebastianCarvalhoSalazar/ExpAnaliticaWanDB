@@ -1,0 +1,2 @@
+matplotlib==3.6.3
+wandb==0.15.4
