@@ -35,14 +35,13 @@ def load_and_log():
         
         datasets = load()  # separate code for loading the datasets
         print(datasets[0])
-        # names = ["training", "validation", "test"]
 
-        # # 🏺 create our Artifact
-        # raw_data = wandb.Artifact(
-        #     "mnist-raw", type="dataset",
-        #     description="raw MNIST dataset, split into train/val/test",
-        #     metadata={"source": "torchvision.datasets.MNIST",
-        #               "sizes": [len(dataset) for dataset in datasets]})
+        # 🏺 create our Artifact
+        raw_data = wandb.Artifact(
+            "mnist-raw", type="dataset",
+            description="raw wisconsin_breast_cancer_dataset, split into train/val/test",
+            metadata={"source": "sklearn.datasets.load_breast_cancer",
+                      "sizes": [len(dataset) for dataset in datasets]})
 
         # for name, data in zip(names, datasets):
         #     # 🐣 Store a new file in the artifact, and write something into its contents.
