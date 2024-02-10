@@ -75,7 +75,7 @@ def load_and_log():
         indices = np.argsort(importances)[::-1]   
 
         # Initialize W&B run
-        run = wandb.init(project='my-scikit-integration', name="classification")
+        # run = wandb.init(project='my-scikit-integration', name="classification")
         
         ### Visualize model performance ###
         # Class Proportions
