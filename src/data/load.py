@@ -66,7 +66,7 @@ def load_and_log():
         # Save the artifact to W&B
         run.log_artifact(raw_data)
 
-        # Train model, get predictions
+        ### Train model, get predictions ###
         model = RandomForestClassifier()
         model.fit(datasets['Data']['Train']['X'], datasets['Data']['Train']['y'])
         y_pred = model.predict(datasets['Data']['Test']['X'])
@@ -77,8 +77,27 @@ def load_and_log():
         # Initialize W&B run
         run = wandb.init(project='my-scikit-integration', name="classification")
         
-        # Visualize model performance
+        ### Visualize model performance ###
+        # Class Proportions
         wandb.sklearn.plot_class_proportions(datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], datasets['Metadata']['Labels'])
+        # Learning Curve
+        wandb.sklearn.plot_class_proportions(datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], datasets['Metadata']['Labels'])
+        # ROC
+        wandb.sklearn.plot_roc(datasets['Data']['Test']['y'], y_probas, datasets['Metadata']['Labels'])
+        # Precision Recall Curve
+        wandb.sklearn.plot_precision_recall(datasets['Data']['Test']['y'], y_probas, datasets['Metadata']['Labels'])
+        # Feature Importances
+        wandb.sklearn.plot_feature_importances(model)
+        # All-in-one: Classifier Plot
+        wandb.sklearn.plot_classifier(model, 
+                              datasets['Data']['Train']['X'], datasets['Data']['Test']['X'], 
+                              datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], 
+                              y_pred, y_probas, 
+                              datasets['Metadata']['Labels'], 
+                              is_binary=True, 
+                              model_name='RandomForest')
+
+        wandb.finish()
 
 # testing
 load_and_log()
