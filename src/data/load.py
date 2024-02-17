@@ -79,7 +79,8 @@ def load_and_log():
         
         ### Visualize model performance ###
         # Class Proportions
-        wandb.sklearn.plot_class_proportions(datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], datasets['Metadata']['Labels'])
+        
+        wandb.log({"plot_class_proportions": wandb.sklearn.plot_class_proportions(datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], datasets['Metadata']['Labels'])})
         # Learning Curve
         wandb.sklearn.plot_class_proportions(datasets['Data']['Train']['y'], datasets['Data']['Test']['y'], datasets['Metadata']['Labels'])
         # ROC
