@@ -63,7 +63,7 @@ def load_and_log():
             with raw_data.new_file(name + "_y.npy", mode="wb") as file:
                 np.save(file, data['y'])        
 
-        # Save the artifact to W&B
+        # Save the artifact to Wandb
         run.log_artifact(raw_data)
 
         ### Train model, get predictions ###
@@ -72,9 +72,9 @@ def load_and_log():
         y_pred = model.predict(datasets['Data']['Test']['X'])
         y_probas = model.predict_proba(datasets['Data']['Test']['X'])
         importances = model.feature_importances_
-        indices = np.argsort(importances)[::-1]   
+        indices = np.argsort(importances)[::-1]  
 
-        # Initialize W&B run
+        # Initialize WandB run
         # run = wandb.init(project='my-scikit-integration', name="classification")
         
         ### Visualize model performance ###
