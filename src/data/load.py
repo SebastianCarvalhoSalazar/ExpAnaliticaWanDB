@@ -56,7 +56,8 @@ def load_and_log():
                 "labels": len(datasets['Metadata']['Labels'])
             })
         
-        # Save each dataset split to the artifact
+
+        # Save each dataset split to the artifact #
         for name, data in datasets['Data'].items():
             with raw_data.new_file(name + "_X.npy", mode="wb") as file:
                 np.save(file, data['X'])
