@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'src/data/load.py'
+      - 'src/load_and_train.py'
 
 jobs:
   load_data:
