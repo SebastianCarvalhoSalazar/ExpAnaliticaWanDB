@@ -6,7 +6,7 @@ from sklearn import datasets
 import wandb
 from sklearn.model_selection import train_test_split
 from sklearn.exceptions import ConvergenceWarning
-warnings.filterwarnings("ignore", category=ConvergenceWarning)
+warnings.filterwarnings("ignore", category=ConvergenceWarning) 
 
 # Argument parser setup
 parser = argparse.ArgumentParser()
